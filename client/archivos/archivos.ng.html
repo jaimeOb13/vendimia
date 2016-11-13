@@ -1,0 +1,105 @@
+<h2>Biblioteca</h2>
+
+		
+<div class="well">	  
+	<div class="row"> 
+		<div class="col-sm-12">	
+			<div class="col-lg-3" ng-repeat="categoria in archi.categoriasLibreros">
+				<a href="#" ng-click="archi.mostrarArchivos(categoria._id, categoria.nombre)">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-6">
+								  <i class="fa fa-bars fa-5x"></i>
+								</div>
+								<div class="col-xs-6 text-right">
+								  <h1 style="font-size:40pt;"><strong></strong></h1>
+								  <p class="announcement-text">{{categoria.nombre}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer announcement-bottom">
+							<div class="row">
+							  <div class="col-xs-6" >
+							    Ver...
+							  </div>
+							  <div class="col-xs-6 text-right">
+							    <i class="fa fa-arrow-circle-right"></i>
+							  </div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div> 
+		</div>
+	</div> 
+</div>
+ 
+
+<br/>
+
+<div class="well "  ng-if="archi.categoriasLibrero_id != ''">
+<div class="row">				
+	<div class="col-sm-4">
+		<h3 class="dark-grey" ng-show="archi.tienePermiso()" >Agregar archivos</h3>
+		
+		<div class="form-group col-lg-12" ng-show="archi.tienePermiso()">
+			<label>Seleccionar archivo</label>
+			<input type="text" class="form-control" placeholder="Nombre" ng-model="archi.archivo.select">
+		</div>
+		
+		<div class="form-group col-lg-12" ng-show="archi.tienePermiso()">
+			<label>Descripción</label>
+			<textarea class="form-control" placeholder="Descripción" ng-model="archi.archivo.descripcion"></textarea>
+		</div>	
+
+
+		<div class="row pull-right" ng-show="archi.tienePermiso()">
+			<div class="col-sm-12">
+				<input type="submit" ng-click="archi.guardar(archi.archivo)" value="Guardar" class="btn btn-primary" ng-show="archi.action">
+				<input type="submit" ng-click="archi.actualizar(archi.archivo)" value="Actualizar" class="btn btn-primary" ng-show="!archi.action">
+			</div>
+		</div>			
+	</div>
+		  
+	<div class="col-sm-8">
+		<h3 class="dark-grey">Listado de la categoría: {{archi.nada}}</h3>
+		<table class="table table-bordered">
+			<thead>
+				<tr >
+					<th>No.</th>
+					<th>Archivos</th>
+					<th>Descripción</th>
+					<th ng-show="archi.tienePermiso()" >Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="archivo in archi.archivos">
+					<td>{{$index + 1}}</td>
+					<td class="text-center">
+                    	<a target="_blank" href="{{archivo.select}}">Ver Archivo</a>
+                    </td>
+					<td>{{archivo.descripcion}}</td>
+					 <td ng-show="archi.tienePermiso()" >
+				    <div class="text-center">
+					    <div class="btn-group">
+							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="caret"></span>
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <ul class="dropdown-menu text-left">
+							    <li><a href="#" ng-click="archi.editar(archivo._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+							  <li><a href="#" ng-click="archi.cambiarEstatus(archivo._id)"><i class="fa fa-trash"></i> Desactivar</a></li>
+							  </ul>
+							</div>
+				    </div>			    
+			    </td>
+				</tr>
+		
+				
+				
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>

@@ -1,0 +1,90 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+		<h1 class="page-title txt-color-blueDark"><i class="fa fa-calendar fa-fw "></i> 
+			Calendario
+			<span>&gt;
+			De Eventos
+			</span>
+		</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12 col-md-12 col-lg-3" style="padding-right: 0px;" ng-show="e.esJefeArea()">
+		<div class="jarviswidget jarviswidget-color-blueDark">
+			<header>
+				<span class="widget-icon"> <i class="fa fa-{{ho.actionAgregar ? 'plus' : 'pencil'}}"></i> </span>
+				<h2> Agregar Eventos </h2>
+			</header>
+		<div>
+		<div class="widget-body">
+			<form id="add-event-form">
+				<fieldset>
+					<div class="form-group">
+						<label for="materia">Título</label>
+						<input class="form-control" placeholder="Título" ng-model="e.evento.title">
+					</div>
+
+					<div class="form-group">
+						<label >Descripción</label>
+						<textarea class="form-control" placeholder="Por favor sea breve" rows="3" maxlength="200" ng-model="e.evento.description"></textarea>
+						<p class="note">Máximo 200 caracteres</p>
+					</div>
+
+					<div class="form-group">
+						<label for="fechaNac">Inicio</label>
+						<input date-time class="form-control" auto-close="true" view="date" max-view="date" min-view="minutes" ng-model="e.evento.start"/>
+					</div>
+					
+					<div class="form-group">
+						<label for="fechaNac">Fin</label>
+						<input date-time class="form-control" auto-close="true" view="date" max-view="date" min-view="minutes" ng-model="e.evento.end"/>
+					</div>
+					
+					
+				</fieldset>
+				<div class="form-actions">
+					<div class="row">
+						<div class="col-sm-4">
+							<a href="#" ng-click="e.agregarEvento(e.evento);" class="btn btn-default pull-left" ng-show="e.actionAgregar"><i class="fa fa-plus fa-lg"></i></a>
+
+							<a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover" ng-click="e.eliminarEvento(e.evento._id);e.modificarEvento(e.evento);" class="btn btn-default pull-left" ng-show="!e.actionAgregar"><i class="fa fa-check fa-lg"></i></a>
+	
+						</div>
+						<div class="col-sm-4 text-center">
+							<a href="#" ng-click="e.cancelarEvento();" class="btn btn-warning" ng-show="!e.actionAgregar"><i class="fa fa-close fa-lg"></i></a>
+						</div>
+						<div class="col-sm-4">
+							<a href="#" ng-click="e.eliminarEvento(e.evento._id);" class="btn btn-danger pull-right" ng-show="!e.actionAgregar"><i class="fa fa-trash fa-lg"></i></a>
+						</div>
+
+						
+
+
+					</div>
+				</div>
+			</form>
+		</div>
+		</div>
+		</div>
+	</div>
+	<div  ng-class="e.esJefeArea() ? 'col-sm-9' : 'col-sm-12'">
+		<div class="jarviswidget jarviswidget-color-blueDark">
+			<header>
+				<span class="widget-icon"> <i class="fa fa-calendar"></i> </span>
+				<h2> Eventos Interceramic </h2>				
+			</header>
+			<div>
+				<div class="widget-body">
+					<div ui-calendar="e.uiConfig.calendar" class="calendar" ng-model="e.eventSources">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="eventContent" title="Event Details" style="display:none;">
+    Inicio: <span id="startTime"></span><br>
+    Fin: <span id="endTime"></span><br><br>
+    <p id="eventInfo"></p>
+</div>
+

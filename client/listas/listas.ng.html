@@ -1,0 +1,276 @@
+ <header style="background-color: red"></header>
+<div class="row" style="background-color: #f3f3f3;">
+	<div class="col-sm-7">
+		<div class="panel panel-default">
+			<div class="panel-body status">
+			<div class="col-sm-12">
+
+			<a ng-show="lis.tienePermiso()" class=" pull-right btn btn-link btn-{{lis.mostrarQuienes == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+				      href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="nuevoquien" ng-click="lis.nuevoQuienes()">
+				   {{lis.mostrarQuienes == true ? 'Agregar texto' : 'Cancelar'}}
+				    </a> 
+				  
+				     <div class="collapse" id="collapseExample" >
+				     <div class="row">
+				     <div class="col-sm-4">
+				     <input class="form-control"  type="text" placeholder="Titulo" ng-model="lis.quien.titulo">
+				      </div>
+				     <div class="col-sm-4">
+					  <input type="text" class="form-control" placeholder="Imagen" ng-model="lis.quien.imagen" >
+					  </div>
+					    </div>
+					    <br/>
+					    <div class="row">
+					     
+				     <textarea  class="form-control"  placeholder="Agregar texto" ng-model="lis.quien.descripcion"></textarea>
+				     </div>
+				      <br/>
+
+				     <a ng-if="lis.tienePermiso()" class="btn btn-primary" ng-click="lis.actualizarQuienes(lis.quien)" ng-show="!lis.accionQuienes">Actualizar</a>
+
+              		<a ng-if="lis.tienePermiso()" class="btn btn-primary" ng-click="lis.guardarQuienes(quien)" value="Guardar" ng-show="lis.accionQuienes">Guardar</a>
+				     </div>
+
+
+
+
+			<div class="who clearfix">		
+		
+				</div>
+				<div class="row">
+					<div class="col-sm-12" ng-repeat="quien in lis.quienes">
+					<h4>{{quien.titulo}}</h4>
+					<p>{{quien.descripcion}}</p>
+					<img   max-width="350px" height="330px"  ng-if="quien.imagen" ng-src="{{quien.imagen}} ">
+					<br/>
+					 
+						<!--Somos una de las Franquicias interceramic más grandes de la republica Mexicana, que a través de 2 Empresas atendemos el 90% de los mercados de los Estados de Sinaloa y Sonora.
+						Tenemos más de 30 años formando parte de la exitosa Red de Franquicias interceramic.-->
+					
+						<a  ng-show="lis.tienePermiso()" class="btn btn-primary btn-sm" ng-click="lis.editarQuienes(quien._id)">Editar</a>
+            			<a  ng-show="lis.tienePermiso()" class="btn btn-danger btn-sm" ng-click="lis.cambiarEstatusQuienes(quien._id)">Borrar</a><br/>
+					</div>	<br/>
+				  </div><br/>				
+			   </div>
+			</div>
+		</div>
+          <div class="panel panel-default">
+			<div class="panel-body status">
+			<div class="col-sm-12">
+
+			<a ng-show="lis.tienePermiso()" class=" pull-right btn btn-link btn-{{lis.mostrarMision == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+				      href="#collapseExampleMision" aria-expanded="false" aria-controls="collapseExampleMision" id="nuevomision" ng-click="lis.nuevoMision()">
+				   {{lis.mostrarMision == true ? 'Agregar texto' : 'Cancelar'}}
+				    </a> 
+				  
+				     <div class="collapse" id="collapseExampleMision" >
+				     <div class="row">
+				     <div class="col-sm-4">
+				     <input class="form-control"  type="text" placeholder="Titulo" ng-model="lis.mision.titulo">
+				      </div>
+				     <div class="col-sm-4">
+					  <input type="text" class="form-control" placeholder="Imagen" ng-model="lis.mision.imagen" >
+					  </div>
+					    </div>
+					    <br/>
+					    <div class="row">
+					     
+				     <textarea  class="form-control"  placeholder="Agregar texto" ng-model="lis.mision.descripcion"></textarea>
+				     </div>
+				      <br/>
+
+				     <a ng-if="lis.tienePermiso()" class="btn btn-primary" ng-click="lis.actualizarMision(lis.mision)" ng-show="!lis.accionMision">Actualizar</a>
+
+              		<a ng-if="lis.tienePermiso()" class="btn btn-primary" ng-click="lis.guardarMision(mision)" value="Guardar" ng-show="lis.accionMision">Guardar</a>
+				     </div>
+			<div class="who clearfix">		
+		
+				</div>
+				<div class="row">
+					<div class="col-sm-12" ng-repeat="mision in lis.misiones">
+					<h4>{{mision.titulo}}</h4>
+					<p>{{mision.descripcion}}</p>
+					<img max-width="350px" height="330px" ng-if="mision.imagen" ng-src="{{mision.imagen}} ">
+					<br/>
+					 
+						<!--Somos una de las Franquicias interceramic más grandes de la republica Mexicana, que a través de 2 Empresas atendemos el 90% de los mercados de los Estados de Sinaloa y Sonora.
+						Tenemos más de 30 años formando parte de la exitosa Red de Franquicias interceramic.-->
+					
+						<a  ng-show="lis.tienePermiso()" class="btn btn-primary btn-sm" ng-click="lis.editarMision(mision._id)">Editar</a>
+            			<a  ng-show="lis.tienePermiso()" class="btn btn-danger btn-sm" ng-click="lis.cambiarEstatusMision(mision._id)">Borrar</a><br/>
+					</div>	<br/>
+				  </div><br/>				
+			   </div>
+			</div>
+		</div>
+		   <div class="panel panel-default">
+			<div class="panel-body status">
+			<div class="col-sm-12">
+
+			<a ng-show="lis.tienePermiso()" class=" pull-right btn btn-link btn-{{lis.mostrarVision == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+				      href="#collapseExampleVision" aria-expanded="false" aria-controls="collapseExampleVision" id="nuevovision" ng-click="lis.nuevoVision()">
+				   {{lis.mostrarVision == true ? 'Agregar texto' : 'Cancelar'}}
+				    </a> 
+				  
+				     <div class="collapse" id="collapseExampleVision" >
+				     <div class="row">
+				     <div class="col-sm-4">
+				     <input class="form-control"  type="text" placeholder="Titulo" ng-model="lis.vision.titulo">
+				      </div>
+				     <div class="col-sm-4">
+					  <input type="text" class="form-control" placeholder="Imagen" ng-model="lis.vision.imagen" >
+					  </div>
+					    </div>
+					    <br/>
+					    <div class="row">
+					     
+				     <textarea  class="form-control"  placeholder="Agregar texto" ng-model="lis.vision.descripcion"></textarea>
+				     </div>
+				      <br/>
+
+				     <a ng-if="lis.tienePermiso()" class="btn btn-primary" ng-click="lis.actualizarVision(lis.vision)" ng-show="!lis.accionVision">Actualizar</a>
+
+              		<a ng-if="lis.tienePermiso()" class="btn btn-primary" ng-click="lis.guardarVision(vision)" value="Guardar" ng-show="lis.accionVision">Guardar</a>
+				     </div>
+			<div class="who clearfix">		
+		
+				</div>
+				<div class="row">
+					<div class="col-sm-12" ng-repeat="vision in lis.visiones">
+					<h4>{{vision.titulo}}</h4>
+					<p>{{vision.descripcion}}</p>
+					<img width="600px" max-width="350px" height="330px" ng-src="{{vision.imagen}} ">
+					<br/>
+					 
+						<!--Somos una de las Franquicias interceramic más grandes de la republica Mexicana, que a través de 2 Empresas atendemos el 90% de los mercados de los Estados de Sinaloa y Sonora.
+						Tenemos más de 30 años formando parte de la exitosa Red de Franquicias interceramic.-->
+					
+						<a  ng-show="lis.tienePermiso()" class="btn btn-primary btn-sm" ng-click="lis.editarVision(vision._id)">Editar</a>
+            			<a  ng-show="lis.tienePermiso()" class="btn btn-danger btn-sm" ng-click="lis.cambiarEstatusVision(vision._id)">Borrar</a><br/>
+					</div>	<br/>
+				  </div><br/>				
+			   </div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body status">
+			<div class="col-sm-12">
+
+			<a ng-show="lis.tienePermiso()" class=" pull-right btn btn-link btn-{{lis.mostrarValores == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+				      href="#collapseExampleValores" aria-expanded="false" aria-controls="collapseExampleValores" id="nuevovalores" ng-click="lis.nuevoValores()">
+				   {{lis.mostrarValores == true ? 'Agregar texto' : 'Cancelar'}}
+				    </a> 
+				  
+				     <div class="collapse" id="collapseExampleValores" >
+				     <div class="row">
+				     <div class="col-sm-4">
+				     <input class="form-control"  type="text" placeholder="Titulo" ng-model="lis.valor.titulo">
+				      </div>
+				     <div class="col-sm-4">
+					  <input type="text" class="form-control" placeholder="Imagen" ng-model="lis.valor.imagen" >
+					  </div>
+					    </div>
+					    <br/>
+					    <div class="row">
+					     
+				     <textarea  class="form-control"  placeholder="Agregar texto" ng-model="lis.valor.descripcion"></textarea>
+				     </div>
+				      <br/>
+
+				     <a ng-if="lis.tienePermiso()" class="btn btn-primary" ng-click="lis.actualizarValores(lis.valor)" ng-show="!lis.accionValores">Actualizar</a>
+
+              		<a ng-if="lis.tienePermiso()" class="btn btn-primary" ng-click="lis.guardarValores(valor)" value="Guardar" ng-show="lis.accionValores">Guardar</a>
+				     </div>
+			<div class="who clearfix">		
+		
+				</div>
+				<div class="row">
+					<div class="col-sm-12" ng-repeat="valor in lis.valores">
+					<h4>{{valor.titulo}}</h4>
+					<p>{{valor.descripcion}}</p>
+					<img max-width="350px" height="330px" ng-if="valor.imagen" ng-src="{{valor.imagen}} ">
+					<br/>
+					 
+						<!--Somos una de las Franquicias interceramic más grandes de la republica Mexicana, que a través de 2 Empresas atendemos el 90% de los mercados de los Estados de Sinaloa y Sonora.
+						Tenemos más de 30 años formando parte de la exitosa Red de Franquicias interceramic.-->
+					
+						<a  ng-show="lis.tienePermiso()" class="btn btn-primary btn-sm" ng-click="lis.editarValores(valor._id)">Editar</a>
+            			<a  ng-show="lis.tienePermiso()" class="btn btn-danger btn-sm" ng-click="lis.cambiarEstatusValores(valor._id)">Borrar</a><br/>
+					</div>	<br/>
+				  </div><br/>				
+			   </div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-5">
+		<div class="panel panel-default">
+
+			<div class="panel-body status">
+
+				<div class="who clearfix">
+				<input id="filter"  width="100px" size="50" ng-model="buscar.nombre" type="text" placeholder="Buscar" />
+				   <br/><br/>
+					<h4>Lista de Sucursales</h4>
+				</div>
+					<br/>
+
+
+                 
+				<div class="who clearfix" style="margin-bottom: 30px;"  ng-repeat="sucursale in lis.sucursales | orderBy:'nombre' | filter:buscar">
+					<img src="{{sucursale.imagen}}" alt="img" width="160px" height="90px" class="online">
+					<span class="name font-sm">  <b><a href="/sucursalVista/{{sucursale._id}}">{{sucursale.nombre}} </a><span class="pull-right font-xs text-muted"><i>{{sucursale.ciudad}}</i></span> </b>
+					</span>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-5 ">
+		<div class="panel panel-default">
+
+			<div class="panel-body status">
+
+				<div class="who clearfix">
+                 
+				<input id="filter"  size="50" ng-model="search.nombre" type="text" placeholder="Buscar" />
+		
+				<br/> <br/>
+					<h4>Lista de Empleados</h4>
+				</div>
+
+				<br/>
+
+				<h4>Jefes de área</h4><br/>
+
+				 <div class="who clearfix" style="margin-bottom: 5px;"  ng-repeat="jefeArea in lis.jefeAreas | orderBy:'nombre' | filter:search ">
+					<img src="{{jefeArea.imagen}}" alt="img" width="100px" height="90px" class="offline">
+					<span class="name font-sm">  <b> <i ng-show="lis.esCumpleanero(jefeArea.fechaNac)" class="fa fa-birthday-cake" aria-hidden="true"></i> <a href="/perfilJefe/{{jefeArea._id}}" >{{jefeArea.nombre}}&nbsp;{{jefeArea.apPaterno}}&nbsp;{{jefeArea.apMaterno}} </a><span class="pull-right font-xs text-muted"><i>{{lis.getDepartamento(jefeArea.departamento_id)}}</i></span> </b>
+						<br>
+					</span>
+				</div>
+
+				<h4>Gerentes</h4><br/>
+
+				<div class="who clearfix" style="margin-bottom: 5px;"  ng-repeat="gerente in lis.gerentes | orderBy:'nombre' | filter:search ">
+					<img src="{{gerente.imagen}}" alt="img" width="100px" height="90px" class="online">
+					<span class="name font-sm">  <b> <i ng-show="lis.esCumpleanero(gerente.fechaNac)" class="fa fa-birthday-cake" aria-hidden="true"></i> <a href="/perfilGerente/{{gerente._id}}">{{gerente.nombre}}&nbsp;{{gerente.apPaterno}}&nbsp;{{gerente.apMaterno}} </a><span class="pull-right font-xs text-muted"><i>{{lis.getDepartamento(gerente.departamento_id)}}</i></span> </b>
+					</span>
+					<br>
+				</div>
+
+				<h4>Asesores de venta</h4><br/>
+
+
+				<div class="who clearfix" style="margin-bottom: 5px;"  ng-repeat="empleado in lis.empleados | orderBy:'nombre' | filter:search ">
+					<img src="{{empleado.imagen}}" alt="img" width="100px" height="90px" class="away">
+					<span class="name font-sm">  <b> <i ng-show="lis.esCumpleanero(empleado.fechaNac)" class="fa fa-birthday-cake" aria-hidden="true"></i> <a href="/perfil/{{empleado._id}}">{{empleado.nombre}}&nbsp;{{empleado.apPaterno}}&nbsp;{{empleado.apMaterno}}</a> <span class="pull-right font-xs text-muted"><i>{{lis.getDepartamento(empleado.departamento_id)}}</i></span> </b>
+						<br>
+					</span>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+</div>

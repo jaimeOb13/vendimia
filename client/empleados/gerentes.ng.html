@@ -1,0 +1,154 @@
+<h2>Gerentes de Tienda</h2>
+<div class="row">
+	<div class="col-sm-12">
+		<a class="btn btn-{{ger.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+			href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="nuevogerente" ng-click="ger.nuevoGerente()">
+	 {{ger.nuevo == true ? 'Nuevo' : 'Cancelar'}}
+		</a>
+		<div class="collapse" id="collapseExample">
+			<form class="form-horizontal" role="form" data-parsley-validate>
+		  	<div class="well">	    
+			    <div class="row">
+			    	<div class="col-sm-4">					    
+				    	<label>Usuario</label>
+				    	<input type="text" class="form-control" placeholder="Usuario" ng-model="ger.gerente.usuario" required>
+			    	</div>
+			    	<div class="col-sm-4">					    
+				    	<label>Contraseña</label>
+				    	<input type="password" class="form-control" placeholder="Contraseña" ng-model="ger.gerente.contrasena" required>
+			    	</div>		    				    	    
+			    	<div class="col-sm-4">					    
+				    	<label>Confirmar Contraseña</label>
+				    	<input type="password" class="form-control" placeholder="Confirmar Contraseña" ng-model="ger.gerente.confirmarContrasena" required>
+					</div>
+			    	<div class="col-sm-4">
+			    		<label>Nombre </label>
+				    	<input type="text" class="form-control" placeholder="Nombre" ng-model="ger.gerente.nombre" required>
+			    	</div>
+
+			    	<div class="col-sm-4">
+			    		<label>Apellido Paterno </label>
+				    	<input type="text" class="form-control" placeholder="Apellido Paterno" ng-model="ger.gerente.apPaterno" required>
+			    	</div>
+			    	<div class="col-sm-4">
+			    		<label>Apellido Materno</label>
+				    	<input type="text" class="form-control" placeholder="Apellido Materno" ng-model="ger.gerente.apMaterno" required>
+			    	</div>
+			    	<div class="col-sm-4">
+						<label for="fechaNac">Cumpleaños</label>
+						<input date-time class="form-control" view="year" max-view="year" min-view="date" ng-model="ger.gerente.fechaNac">
+					</div>
+					<div class="col-sm-4">
+						<label>Aniversario en la Empresa</label>
+						<input date-time class="form-control" view="year" max-view="year" min-view="date" ng-model="ger.gerente.fechaIn">
+					</div>
+			    	
+			    	<div class="col-sm-4">
+			    		<label>Teléfono</label>
+				    	<input type="text" class="form-control" placeholder="Teléfono" ng-model="ger.gerente.telefono" required>
+			    	</div>
+			    	<div class="col-sm-4">
+			    		<label>Correo</label>
+				    	<input type="text" class="form-control" placeholder="Correo" ng-model="ger.gerente.correo" required>
+			    	</div>
+			    	<div class="col-sm-2">
+						<label>Departamento</label>
+						<select class="form-control select2" placeholder="Seleccione" ng-model="ger.gerente.departamento_id">
+						  <option ng-repeat="departamento in ger.departamentos" value="{{departamento._id}}">
+						  	{{departamento.nombre}}
+						  </option>
+						</select>
+							</div>
+
+
+						<div class="col-sm-2">
+						<label>Sucursal</label>
+						<select id="sucu" class="form-control select2" placeholder="Seleccione" ng-model="ger.gerente.sucursale_id">
+						<option ng-click="ger.desSelect()">No soy sucursal</option>
+						  <option ng-click="selectSucu"  ng-repeat="sucursale in ger.sucursales" value="{{sucursale._id}}">
+						  	{{sucursale.nombre}}
+						  </option>
+						</select>
+							</div>
+			    	  <div class="col-sm-4">
+						    <label>Imagen</label>
+					    	<input type="text" class="form-control" placeholder="Imagen" ng-model="ger.gerente.imagen" required>
+					    </div>
+
+					</div>				
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<input type="submit" ng-click="ger.guardar(ger.gerente)" value="Guardar" class="btn btn-primary" ng-show="ger.action">
+						<input type="submit" ng-click="ger.actualizar(ger.gerente)" value="Actualizar" class="btn btn-primary" ng-show="!ger.action">				
+					</div>
+				</div>	  
+		  </form>
+		</div>
+	</div>
+</div>
+
+<!-- List -->
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th width="10%"><div class="text-center">Foto</div></th>
+					<th width="10%"><div class="text-center">Nombre</div></th>
+					<th width="15%"><div class="text-center">Departamento</div></th>
+					<th width="10%"><div class="text-center">Sucursal</div></th>
+					<th width="10%"><div class="text-center">Teléfono</div></th>
+					<th width="10%"><div class="text-center">correo</div></th>
+					<th width="10%">
+						<div class="text-center">
+							Estatus
+						</div>
+					</th>
+					<th width="7%">
+						<div class="text-center">
+							Acciones
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="gerente in ger.gerentes">
+		    	<td><img width="50px" ng-src="{{gerente.imagen}} "></td>
+			    <td>{{gerente.nombre}} {{gerente.apPaterno}} {{gerente.apMaterno}}</td>
+			    <td>{{ger.getDepartamento(gerente.departamento_id)}}</td>
+			    <td>{{ger.getSucursal(gerente.sucursale_id)}}</td>
+			    <td>{{gerente.telefono}} </td>
+			    <td>{{gerente.correo}} </td>
+			    <td>
+				    <div class="text-center">
+				    	<span ng-if="gerente.estatus" class="label label-success">
+							  Activo
+							</span>
+							<span ng-if="!gerente.estatus" class="label label-danger">
+							  Inactivo
+							</span>
+				    </div>
+			    </td>
+			    <td>
+				    <div class="text-center">
+					    <div class="btn-group">
+							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="caret"></span>
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <ul class="dropdown-menu text-left">
+							    <li><a href="#" ng-click="ger.editar(gerente._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+							  <li><a href="#" ng-click="ger.cambiarEstatus(gerente._id)"><i class="fa fa-trash"></i> Desactivar</a></li>
+							  </ul>
+							</div>
+				    </div>	
+				 			    
+			    </td>
+		    </tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
