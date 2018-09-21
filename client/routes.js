@@ -91,188 +91,33 @@ angular.module('interCeramic').config(['$injector', function ($injector) {
        controller: 'PerfilCtrl as perfil', 
       
     })
-    .state('root.perfilGerente', {
-      url: '/perfilGerente/:id',
-      params: {'id':':id'},
-      templateUrl: 'client/listas/perfilGerente.ng.html',  
-       controller: 'PerfilCtrl as perfil', 
-      
-    })
-    .state('root.perfilJefe', {
-      url: '/perfilJefe/:id',
-      params: {'id':':id'},
-      templateUrl: 'client/listas/perfilJefe.ng.html',  
-       controller: 'PerfilCtrl as perfil', 
-      
-    })
 
-
-      .state('root.panel', {
-      url: '/panel/:id',
-      templateUrl: 'client/layouts/left-nav.ng.html',  
-       controller: 'RootCtrl as root', 
-      
-    })
-    .state('root.miCumple', {
-      url: '/miCumple/:id',
-      templateUrl: 'client/miCumple/miCumple.ng.html',  
-       controller: 'MiCumpleCtrl as cumple',  
-    })
-
-      .state('root.recuperar', {
-      url: '/recuperar/',
-      templateUrl: 'client/login/recuperar.ng.html',  
-       controller: 'RecuperarCtrl as forgot',  
-    })
-       .state('root.sucursales', {
-      url: '/sucursales/:id',
-      templateUrl: 'client/sucursales/sucursales.ng.html',  
-       controller: 'SucursalesCtrl as sucu', 
-       resolve: {
-        "currentUser": ["$meteor", "toastr", function($meteor, toastr){
-          return $meteor.requireValidUser(function(user) {
-            if(user.roles[0] == "admin"){
-              return true;
-            }else{
-              return 'UNAUTHORIZED'; 
-            }
-         });
-       }]
-      } 
-    })
-       .state('root.sucursalVista', {
-      url: '/sucursalVista/:id',
-      templateUrl: 'client/sucursales/sucursalVista.ng.html',  
-       controller: 'SucursalesVistaCtrl as sucu',  
-    })
-        .state('root.vistaPerfilAsesor', {
-      url: '/vistaPerfilAsesor/:id',
-      templateUrl: 'client/listas/vistaPerfilAsesor.ng.html',  
-       controller: 'PerfilCtrl as perfil',  
-    })
-        .state('root.gerenteVistaPerfil', {
-      url: '/gerenteVistaPerfil/:id',
-      templateUrl: 'client/listas/gerenteVistaPerfil.ng.html',  
-       controller: 'PerfilCtrl as perfil',  
-    })
-        .state('root.vistaPerfilJefe', {
-      url: '/vistaPerfilJefe/:id',
-      templateUrl: 'client/listas/vistaPerfilJefe.ng.html',  
-       controller: 'PerfilCtrl as perfil',  
-    })
-
-      
-    
-
-    ///////////////////////ARTICULOS///////////////////////////////////////////////
-    .state('root.articulos', {
-      url: '/articulos',
-      templateUrl: 'client/articulos/articulos.ng.html',
-      controller: 'ArticulosCtrl as art',
-    })
-    .state('root.articulosUser', {
-      url: '/articulosUser',
-      templateUrl: 'client/articulos/articulosUser.ng.html',
-      controller: 'ArticulosUserCtrl as artU',
-    })
-    ///////////////////////CATEGORIAS/////////////////////////////////////////////////
-
-    .state('root.categorias', {
-      url: '/categorias',
-      templateUrl: 'client/categorias/categorias.ng.html',
-      controller: 'CategoriasCtrl as catego',
-       resolve: {
-        "currentUser": ["$meteor", "toastr", function($meteor, toastr){
-          return $meteor.requireValidUser(function(user) {
-            if(user.roles[0] == "admin"){
-              return true;
-            }else{
-              return 'UNAUTHORIZED'; 
-            }
-         });
-       }]
-      }
-    })
-    .state('root.categoriasArts', {
-      url: '/categoriasArts',
-      templateUrl: 'client/categorias/categoriasArts.ng.html',
-      controller: 'CategoriasArtCtrl as cate',
-       resolve: {
-        "currentUser": ["$meteor", "toastr", function($meteor, toastr){
-          return $meteor.requireValidUser(function(user) {
-            if(user.roles[0] == "admin"){
-              return true;
-            }else{
-              return 'UNAUTHORIZED'; 
-            }
-         });
-       }]
-      }
-    })
-    .state('root.categoriasLibreros', {
-      url: '/categoriasLibreros',
-      templateUrl: 'client/categorias/categoriasLibreros.ng.html',
-      controller: 'CategoriasLibrerosCtrl as catelib',
-       resolve: {
-        "currentUser": ["$meteor", "toastr", function($meteor, toastr){
-          return $meteor.requireValidUser(function(user) {
-            if(user.roles[0] == "admin"){
-              return true;
-            }else{
-              return 'UNAUTHORIZED'; 
-            }
-         });
-       }]
-      }
-    })
-        .state('root.categoriasResults', {
-      url: '/categoriasResults',
-      templateUrl: 'client/categorias/categoriasResults.ng.html',
-      controller: 'CategoriasResultsCtrl as cateres',
-       resolve: {
-        "currentUser": ["$meteor", "toastr", function($meteor, toastr){
-          return $meteor.requireValidUser(function(user) {
-             if(user.roles[0] == "jefeArea" || user.roles[0] == "admin"){
-              return true;
-            }else{
-              return 'UNAUTHORIZED'; 
-            }
-         });
-       }]
-      }
-    })
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
-    .state('root.archivos', {
-      url: '/archivos',
-      templateUrl: 'client/archivos/archivos.ng.html',
-      controller: 'ArchivosCtrl as archi',
+    .state('root.ventas', {
+      url: '/ventas',
+      templateUrl: 'client/ventas/ventas.html',
+      controller: 'VentasCtrl as ven',
     })
-      .state('root.resultados', {
-      url: '/resultados',
-      templateUrl: 'client/resultados/resultados.ng.html',
-      controller: 'ResultadosCtrl as resu',
+    .state('root.nuevaVenta', {
+      url: '/nuevaVenta',
+      templateUrl: 'client/ventas/nuevaVenta.html',
+      controller: 'NuevaVentaCtrl as ven',
+    })
+      .state('root.clientes', {
+      url: '/clientes',
+      templateUrl: 'client/clientes/clientes.html',
+      controller: 'ClientesCtrl as c',
      
     })
-    .state('root.eventos', {
-      url: '/eventos',
-      templateUrl: 'client/eventos/eventos.ng.html',
-      controller: 'EventosCtrl as e',
+    .state('root.articulos', {
+      url: '/articulos',
+      templateUrl: 'client/articulos/articulos.html',
+      controller: 'ArticulosCtrl as art',
     })
-    .state('root.noticias', {
-      url: '/noticias',
-      templateUrl: 'client/noticias/noticias.ng.html',
-      controller: 'NoticiasCtrl as not',
-       resolve: {
-        "currentUser": ["$meteor", "toastr", function($meteor, toastr){
-          return $meteor.requireValidUser(function(user) {
-             if(user.roles[0] == "jefeArea" || user.roles[0] == "admin"){
-              return true;
-            }else{
-              return 'UNAUTHORIZED'; 
-            }
-         });
-       }]
-      }
+    .state('root.configuraciones', {
+      url: '/configuraciones',
+      templateUrl: 'client/configuraciones/configuraciones.html',
+      controller: 'ConfiguracionesCtrl as c',
     })
    /*.state('root.departamentos', {
       url: '/departamentos',

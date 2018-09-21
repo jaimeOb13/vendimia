@@ -1,109 +1,93 @@
 angular.module("interCeramic")
 .controller("ArticulosCtrl", ArticulosCtrl);  
  function ArticulosCtrl($scope, $meteor, $reactive, $state, $stateParams, toastr, $rootScope){
- 	$reactive(this).attach($scope);
-  this.action = true;
-	this.subscribe('articulos');
-	this.subscribe('categoriasArts');
+ 	rc = $reactive(this).attach($scope);
+	 this.action = true;
+	 this.nuevo = true;	 
+	 window.rc = rc;
+	 
+	 
+	 this.subscribe("articulos",()=>{
+		 return [{estatus : true}]
+	 });
+	 
+	 this.helpers({
+		 articulos : () => {
+			 return Articulos.find().fetch();
+		 },
+	 });
+			 
+	 this.nuevoArticulo = function()
+	 {
+		 this.action = true;
+		 this.nuevo = !this.nuevo;
+		 this.articulo = {};		
+	 };
+	 
+	 
+	 this.validar = function (articulo,form) {
+	  
+			if(articulo.descripcion== undefined )
+			{
+				toastr.error('No es posible continuar, debe ingresar "descripcion" es obligatorio');
+			}
+			if(articulo.modelo== undefined )
+			{
+				toastr.error('No es posible continuar, debe ingresar "modelo" es obligatorio');
+			}
+			if(articulo.precio== undefined )
+			{
+				toastr.error('No es posible continuar, debe ingresar "precio" es obligatorio');
+			}
+			if(articulo.existencia== undefined )
+			{
+				toastr.error('No es posible continuar, debe ingresar "existencia" es obligatorio');
+			}
+			if(articulo.existencia!= undefined  && articulo.descripcion!= undefined &&   articulo.precio!= undefined &&  articulo.existencia != undefined)
+			{	
+				this.guardar(articulo,form)
+			}
 
-	$rootScope.home = false;
+		 
+	 };
+	 
+	 this.guardar = function(articulo,form)
+		 {
+			var ultimoArticulo = Articulos.findOne({}, {sort: {clave: -1, limit: 1}});
+		 if(ultimoArticulo == undefined){
+			 articulo.clave =  1
+		 }else{
+			articulo.clave = ultimoArticulo.clave +1
+		 }
+		 //////
+		 articulo.estatus = true;
+		 var nombre = articulo.nombre != undefined ? articulo.nombre + " " : "";
+		 var apPaterno = articulo.apPaterno != undefined ? articulo.apPaterno + " " : "";
+		 var apMaterno = articulo.apMaterno != undefined ? articulo.apMaterno : "";
+		 articulo.nombreCompleto = nombre + apPaterno + apMaterno;
+		 articulo.fechaCreacion = new Date();
+		 Articulos.insert(articulo);
+		 console.log(articulo);
+		 rc.articulo = {};
+		 this.nuevo = false
+		 };
+	 this.editar = function(id)
+		 {
+			 this.articulo = Articulos.findOne({_id:id});
+			 this.action = false;
+			 $('.collapse').collapse("show");
+			 this.nuevo = false;
+		 };
+		 
+		 this.actualizar = function(articulo,form)
+		 {
+	 
+			 var idTemp = articulo._id;
+			 delete articulo.$$hashKey;
+			 delete articulo._id;		
+			 Articulos.update({_id:idTemp},{$set:articulo});
+			 $('.collapse').collapse('hide');
+			 this.nuevo = true;
+		 };
 
-	this.helpers({
-	  articulos : () => {
-		  return Articulos.find();
-	  },
-	   categoriasArts : () => {
-		  return CategoriasArts.find();
-	  }
-  });
-  	  
-  this.nuevo = true;	  
-  this.nuevoArticulos = function()
-  {
-    this.action = true;
-    this.nuevo = !this.nuevo;
-    this.articulo = {};		
-    $('#summernote').summernote('reset');
-  };
-  
-  this.guardar = function(articulo)
-	{
-		this.articulo.nota = $('#summernote').summernote('code');
-		this.articulo.nombre = Meteor.user().profile.nombre;
-		this.articulo.estatus = true;
-		console.log(this.articulo);
-		this.articulo.fecha = new Date();
-		Articulos.insert(this.articulo);
-		toastr.success('Artículo guardado.');
-		this.articulo = {}; 
-		$('.collapse').collapse('hide');
-		this.nuevo = true;
-		$state.go('root.articulos')
-	};
-	
-	this.editar = function(id)
-	{
-    this.articulo = Articulos.findOne({_id:id});
-    this.action = false;
-    $('.collapse').collapse('show');
-    this.nuevo = false;
-	};
-
-
-
-
-
-	
-	this.actualizar = function(articulo)
-	{
-		this.articulo.nota = $('#summernote').summernote('code');
-		var idTemp = articulo._id;
-		delete articulo._id;		
-		Articulos.update({_id:idTemp},{$set:articulo});
-		$('.collapse').collapse('hide');
-		this.nuevo = true;
-	};
-	
-
-	this.cambiarEstatus = function(id)
-	{
-		var articulo = Articulos.findOne({_id:id});
-		if(articulo.estatus == true)
-			articulo.estatus = false;
-		else
-			articulo.estatus = true;
-		
-		Articulos.update({_id: id},{$set :  {estatus : articulo.estatus}});
-    };
-
-    this.getCategoria= function(id)
-	{
-		var categorias = CategoriasArts.findOne(id);
-		if(categorias)
-		return categorias.nombre;
-	};	
-
-		
-	this.tienePermiso = function()
-	{
-		if(Meteor.user().roles[0] == "empleado" )
-		{
-			return false;
-		}
-		if(Meteor.user().roles[0] == "asesorVenta" )
-		{
-			return false;
-		}
-		if(Meteor.user().roles[0] == "gerente" )
-		{
-			return false;
-		}
-		else{
-			return true;
-		}
-		
-	}
-	    $(document).ready(function() {
-  $('#summernote').summernote();
-}); 
-};
+	 }

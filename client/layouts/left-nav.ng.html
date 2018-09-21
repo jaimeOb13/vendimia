@@ -1,165 +1,38 @@
-<!--
-EJEMPLO DE COMO AGREGAR ELEMENTOS
-A LA BARRA LATERAL
-
-<ul data-smart-menu>
-  <li data-ui-sref-active="active">
-    <a data-ui-sref="app.dashboard" title="Dashboard">
-      <i class="fa fa-lg fa-fw fa-home"></i>
-      <span class="menu-item-parent">Dashboard</span>
-    </a>
-  </li>
-  <li data-menu-collapse>
-    <a href="#">
-      <i class="fa fa-lg fa-fw fa-bar-chart-o"></i>
-      <span class="menu-item-parent">Graphs</span>
-    </a>
-    <ul>
-      <li data-ui-sref-active="active">
-         <a data-ui-sref="app.graphs.flot">Flot Chart</a>
-      </li>
-      <li data-ui-sref-active="active">
-          <a data-ui-sref="app.graphs.morris">Morris Charts</a>
-      </li>
-    </ul>
-
-  </li>
-</ul>
--->
-
 <nav>
-	<ul data-smart-menu>
-
-	 <li data-ui-sref-active="active">
-		      <a ui-sref="root.home" tilte="Home">
-		        <i class="fa fa-lg fa-fw fa-home"></i>
-		        <span class="menu-item-parent">Inicio</span>
+	<ul data-smart-menu> 
+		<li data-menu-collapse ng-show="root.ticket(currentUser.profile.empleado_id)">
+			<a>
+				<!-- <i class="fa fa-lg fa-fw  fa-tag"></i> -->
+				<span class="menu-item-parent">Inicio</span>
+			</a>
+				<ul>
+				<li>
+		      <a ui-sref="root.ventas">
+		        <span class="menu-item-parent">Ventas</span>
 		      </a>
 		    </li>
-		   <li>
-	     <a ui-sref="root.listas">
-	      <i class="fa fa-lg fa-fw fa-bar-chart-o"></i>
-	      <span class="menu-item-parent">Quiénes somos</span>
-	    </a>
-	    </li>
-	       <li>
-		      <a ui-sref="root.eventos" ng-click="root.cargar()"> 
-		        <i class="fa fa-lg fa-fw fa-calendar-o"></i>
-		        <span class="menu-item-parent">Eventos</span>
+				<li>
+		      <a ui-sref="root.clientes">
+		        <span class="menu-item-parent">Clientes</span>
 		      </a>
-		    </li>
-		      <li>
-	    <a ui-sref="root.resultados">
-	      <i class="fa fa-lg fa-fw fa-bar-chart-o"></i>
-	      <span class="menu-item-parent">Resultados</span>
-	    </a>
-	  </li>
-	<li data-ui-sref-active="active">
-		      <a ui-sref="root.articulos">
-		        <i class="fa fa-lg fa-fw fa-bars"></i>
-		        <span class="menu-item-parent">Artículos</span>
-		      </a>
-		    </li>
-		    <li>
-	    <a ui-sref="root.archivos">
-	      <i class="fa fa-lg fa-fw fa fa-book"></i>
-	      <span class="menu-item-parent">Biblioteca</span>
-	    </a>
-	     </li>
-		      <li>
-		      <a ui-sref="root.mercas">
-		        <i class="fa fa-pencil-square"></i>
-		        <span class="menu-item-parent">Mercadotecnia</span>
-		      </a>
-		    </li>
-		    
-	     <li data-menu-collapse ng-show="root.ticket(currentUser.profile.empleado_id)">
-		      <a>
-		        <i class="fa fa-lg fa-fw  fa-tag"></i>
-		        <span class="menu-item-parent">Tickets</span>
-		      </a>
-		          <ul>
-		          <li>
-		      <a ui-sref="root.tickets">
-		        
-		        <span class="menu-item-parent">Agregar ticket</span>
-		      </a>
-		    </li>
-		      	 <li>
-		      <a ui-sref="root.listaTickets">
-		           <!--<i class="fa fa-lg fa-fw fa-users"></i>-->
-		        <span class="menu-item-parent">Lista de Tickets</span>
-		      </a>
-		    </li>
-		      </ul>
-		    </li>
-		    <li data-ui-sref-active="active " ng-show="root.mostrar(currentUser.profile.empleado_id)">
-		      <a ui-sref="root.noticias">
-		        <i class="fa fa-lg fa-fw fa fa-archive" ></i>
-		        <span class="menu-item-parent">Noticias</span>
-		      </a>
-		    </li>  
-		     <li  ng-show="currentUser.username == 'admin'">
-		      <a ui-sref="root.categorias">
-		        <i class="fa fa-list-alt" ></i>
-		        <span class="menu-item-parent" >Categorías</span>
-		      </a>
-		    </li>       
-		    <li>
-		      <a ui-sref="root.departamentos" ng-show="currentUser.username == 'admin'">
-		        <i class="fa fa-lg fa-fw fa fa-sitemap"></i>
-		        <span class="menu-item-parent">Departamentos</span>
-		      </a>
-		    </li>
-		    <li data-menu-collapse  ng-show="currentUser.username == 'admin'">
-		     <a href="">
-		        <i class="fa fa-lg fa-fw fa-users"></i>
-		        <span class="menu-item-parent">Staff</span>
-		      </a>
-		      <ul>
-		      <li>
-		          <a ui-sref="root.jefeAreas">
-		       <!-- <i class="fa fa-lg fa-fw fa-users"></i>-->
-		        <span class="menu-item-parent">Jefe de Areas</span>
-		      </a>
-		    </li>
-		    <li>
-		        <a ui-sref="root.gerentes">
-		         <!--<i class="fa fa-lg fa-fw fa-users"></i>-->
-		        <span class="menu-item-parent">Gerentes de Tienda</span>
-		      </a>
-		    </li>
-		     <li>
-		      <a ui-sref="root.empleados">
-		          <!-- <i class="fa fa-lg fa-fw fa-users"></i>-->
-		        <span class="menu-item-parent">Asesor de Ventas</span>
-		      </a>
-		    </li>
-		      </ul>
-		    </li>
-		  
-		        <li ng-show="currentUser.username == 'admin'" >
-		      <a ui-sref="root.sucursales" >
-		        <i class="fa fa-industry"></i>
-		        <span class="menu-item-parent">Sucursales</span>
-		      </a>
-		    </li>
-		
-	    <li>
-	     <a ui-sref="root.miCumple" ng-if="root.fecha(root.empleado.fechaNac) || root.fecha(root.jefeArea.fechaNac) || root.fecha(root.gerente.fechaNac) || root.fecha(root.empleado.fechaNac) ">
-	      <i class="fa fa-lg fa-fw fa-bar-chart-o"></i>
-	      <span class="menu-item-parent">Mi cumpleaños</span>
-	    </a>
-	    
-	    </li>
-
+				</li>
+				<li>
+					<a ui-sref="root.articulos">
+						<span class="menu-item-parent">Articulos</span>
+					</a>
+				</li>
+				<li>
+					<a ui-sref="root.configuraciones">
+						<span class="menu-item-parent">Configuración</span>
+					</a>
+				</li>
+				</ul>
+		</li>
 	    <li class=" pull-right" >
 	     <a  align="right" ng-click="root.linkers(currentUser.profile.empleado_id)">
 	      <i  class="fa fa-lg fa-fw fa fa-user"></i>
 	      <span class="menu-item-parent">{{root.user}}</span>
 	    </a>
-	    
 	    </li>
   </ul>
-
 </nav>

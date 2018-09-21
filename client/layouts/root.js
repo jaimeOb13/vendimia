@@ -7,50 +7,7 @@ angular
     $rootScope.home = true;
     
     users = []; 
-    
-    this.subscribe('gerente', () => {
-      return [{id : this.getReactively('empleado_id')}];
-    });
 
-    this.subscribe('jefeArea', () => {
-      return [{id : this.getReactively('empleado_id')}];
-    });
-
-    this.subscribe('empleado', () => {
-      return [{id : this.getReactively('empleado_id')}];
-    });
-    this.subscribe('departamentos',()=>{
-      return [{estatus:true}]
-    });
-
-    this.helpers({
-	  empleado : () => {
-		  return Empleados.findOne();
-	  },
-     gerente : () => {
-      return Gerentes.findOne();
-    },
-     jefeArea : () => {
-      return JefeAreas.findOne();
-    },
-	  departamentos : () => {
-		  return Departamentos.find();
-	  },
-    empleado_id : () =>{
-      if(Meteor.user() != undefined){
-        return Meteor.user().profile.empleado_id
-      }else{
-        return "";
-      }
-    },
-    user: () =>{
-      if(Meteor.user() != undefined){
-        return Meteor.user().username;
-      }else{
-        return "";
-      }
-    }
-  });
 
   this.isLoggedIn = function(){
 	  return Meteor.user();
